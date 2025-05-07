@@ -12,8 +12,10 @@ export default function Layout({ children }) {
         <br />
         <Link href="/dashboard/settings">Settings</Link>
       </div>
+
       <h1>Layout {count}</h1>
       <button onClick={() => setCount(count + 1)}>Increment</button>
+
       {children}
     </>
   );
