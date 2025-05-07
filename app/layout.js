@@ -7,6 +7,10 @@ export default function RootLayout(props) {
   console.log("🚀 ~ RootLayout ~ props:", props);
   const { children } = props;
 
+  setTimeout(() => {
+    throw new Error("根布局错误"); // 人为制造错误
+  }, 1000);
+
   return (
     <html lang="en">
       <body>
