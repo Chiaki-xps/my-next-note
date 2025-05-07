@@ -11,6 +11,8 @@ export default function Layout({ children }) {
         <Link href="/dashboard/about">About</Link>
         <br />
         <Link href="/dashboard/settings">Settings</Link>
+        <br />
+        <Link href="/dashboard/noFound">noFound</Link>
       </div>
 
       <h1>Layout {count}</h1>

@@ -11,12 +11,17 @@ export default function Page() {
 
   return (
     <>
-      <Link href="/dashboard">dashboard</Link>
-      <h1>这个页面，最后会作为同层的layout的参数传入!(前提没有template.js)</h1>
+      <h1>
+        这个页面，最后会children参数 传入给temple.js
+        之后temple.js作为参数传递给layout.js
+      </h1>
 
       <>
         {error ? Error() : <button onClick={handleGetError}>Get Error</button>}
       </>
+
+      <Link href="/dashboard">dashboard</Link>
+      <Link href="/history">history</Link>
     </>
   );
 }
