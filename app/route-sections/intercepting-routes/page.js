@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="flex flex-row flex-wrap">
       {photos.map(({ id, src }) => (
-        <Link key={id} href={`/route-sections/InterceptingRoutes/photo/${id}`}>
+        <Link key={id} href={`/route-sections/intercepting-routes/photo/${id}`}>
           <Image
             width="200"
             height="200"
