@@ -6,7 +6,7 @@ export const metadata = {
 };
 
 export default function RootLayout(props) {
-  console.log("🚀 ~ RootLayout ~ props:", props);
+  // console.log("🚀 ~ RootLayout ~ props:", props);
   const { children } = props;
 
   return (

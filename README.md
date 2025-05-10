@@ -1,4 +1,7 @@
-# 路由
+# Next 教程
 
-- http://localhost:3000/dashboard
-- http://localhost:3000
+## 路由
+
+```http
+http://localhost:3000/route-sections
+```
