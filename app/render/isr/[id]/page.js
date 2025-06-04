@@ -8,7 +8,7 @@ async function getPost(id) {
     `https://jsonplaceholder.typicode.com/posts/${getRandomInt(100)}`,
     {
       next: {
-        revalidate: 10, // 每10秒重新验证数据
+        revalidate: 100, // 每10秒重新验证数据
       },
     }
   );
