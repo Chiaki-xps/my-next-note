@@ -2,7 +2,7 @@
 const nextConfig = {
   images: {
     // 配置图源
-    domains: ["picsum.photos"], // 添加允许的图片域名
+    domains: ["picsum.photos", "cdn2.thecatapi.com"], // 添加允许的图片域名
   },
 };
 
