@@ -4,35 +4,63 @@ function getRandomInt(max) {
 }
 
 async function getPost(id) {
-  const res = await fetch(
-    `https://jsonplaceholder.typicode.com/posts/${getRandomInt(100)}`,
-    {
-      next: {
-        revalidate: 100, // 每10秒重新验证数据
-      },
+  try {
+    const res = await fetch(
+      `https://jsonplaceholder.typicode.com/posts/${getRandomInt(100)}`,
+      {
+        next: {
+          revalidate: 100, // 每10秒重新验证数据
+        },
+      }
+    );
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch data");
     }
-  );
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
+    return res.json();
+  } catch (error) {
+    console.warn("Failed to fetch post, using fallback data:", error.message);
+
+    // 返回一个默认的帖子数据
+    return {
+      id: id,
+      title: `Fallback Post ${id}`,
+      body: "This is fallback content when the API is unavailable.",
+    };
   }
-
-  return res.json();
 }
 
 // 生成初始的静态路径
 export async function generateStaticParams() {
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
-    next: {
-      revalidate: 10,
-    },
-  });
-  const posts = await res.json();
+  try {
+    const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
+      next: {
+        revalidate: 10,
+      },
+    });
 
-  // 只预渲染前10个页面
-  return posts.slice(0, 10).map((post) => ({
-    id: String(post.id),
-  }));
+    if (!res.ok) {
+      throw new Error("Failed to fetch posts");
+    }
+
+    const posts = await res.json();
+
+    // 只预渲染前10个页面
+    return posts.slice(0, 10).map((post) => ({
+      id: String(post.id),
+    }));
+  } catch (error) {
+    console.warn(
+      "Failed to fetch posts for static generation, using fallback:",
+      error.message
+    );
+
+    // 如果API请求失败，返回一些默认的静态路径
+    return Array.from({ length: 10 }, (_, i) => ({
+      id: String(i + 1),
+    }));
+  }
 }
 
 export default async function BlogPost({ params }) {
