@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 export default async function Page({ searchParams }) {
+  const params = await searchParams;
   const url = (
     await (
       await fetch("https://api.thecatapi.com/v1/images/search", {
@@ -16,7 +17,7 @@ export default async function Page({ searchParams }) {
       </p>
       <Image src={url} width={300} height={300} alt="cat" />
       {new Date().toLocaleTimeString()}
-      {JSON.stringify(searchParams)}
+      {JSON.stringify(params)}
     </>
   );
 }
