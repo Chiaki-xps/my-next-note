@@ -39,6 +39,30 @@ export default function Page() {
               </h2>
               <p className="text-orange-600">演示如何取消正在进行的请求</p>
             </Link>
+
+            <Link
+              href="/caching/routerCache"
+              className="block p-6 bg-red-50 hover:bg-red-100 rounded-lg border border-red-200 transition-colors duration-200"
+            >
+              <h2 className="text-xl font-semibold text-red-800 mb-2">
+                demo4 - 路由缓存
+              </h2>
+              <p className="text-red-600">
+                演示路由缓存，点击a和b，会看到不同的组件
+              </p>
+            </Link>
+
+            <Link
+              href="/caching/demo5/about"
+              className="block p-6 bg-yellow-50 hover:bg-yellow-100 rounded-lg border border-yellow-200 transition-colors duration-200"
+            >
+              <h2 className="text-xl font-semibold text-yellow-800 mb-2">
+                demo5 - 动态缓存
+              </h2>
+              <p className="text-yellow-600">
+                演示动态缓存，点击about和settings，会看到不同的组件
+              </p>
+            </Link>
           </div>
 
           <p>
