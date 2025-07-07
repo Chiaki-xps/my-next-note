@@ -1,9 +1,10 @@
-import SidebarNoteItemContent from '@/components/SidebarNoteItemContent';
-import SidebarNoteItemHeader from '@/components/SidebarNoteItemHeader';
+import SidebarNoteItemContent from "./SidebarNoteItemContent";
+import SidebarNoteItemHeader from "./SidebarNoteItemHeader";
 
-export default function SidebarNoteItem({ noteId, note}) {
-
-  const { title, content = '', updateTime } = note;
+// noteId
+// note {title: string, content: string, updateTime: string}
+export default function SidebarNoteItem({ noteId, note }) {
+  const { title, content = "", updateTime } = note;
   return (
     <SidebarNoteItemContent
       id={noteId}
@@ -12,8 +13,9 @@ export default function SidebarNoteItem({ noteId, note}) {
         <p className="sidebar-note-excerpt">
           {content.substring(0, 20) || <i>(No content)</i>}
         </p>
-      }>
-        <SidebarNoteItemHeader title={title} updateTime={updateTime} />
+      }
+    >
+      <SidebarNoteItemHeader title={title} updateTime={updateTime} />
     </SidebarNoteItemContent>
   );
 }

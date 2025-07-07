@@ -1,23 +1,26 @@
+// 侧边栏组件
+// 这是一个服务端组件
 import React, { Suspense } from "react";
 import Link from "next/link";
 import { getAllNotes } from "@/lib/redis";
 
-import SidebarNoteList from "@/components/SidebarNoteList";
-import EditButton from "@/components/EditButton";
-import NoteListSkeleton from "@/components/NoteListSkeleton";
+import SidebarNoteList from "./SidebarNoteList";
+import EditButton from "./EditButton";
+import NoteListSkeleton from "./NoteListSkeleton";
+import Image from "next/image";
 
 export default async function Sidebar() {
   const notes = await getAllNotes();
   return (
     <>
       <section className="col sidebar">
-        <Link href={"/"} className="link--unstyled">
+        <Link href={"/noteDemo"} className="link--unstyled">
           <section className="sidebar-header">
-            <img
+            <Image
               className="logo"
               src="/logo.svg"
-              width="22px"
-              height="20px"
+              width={22}
+              height={20}
               alt=""
               role="presentation"
             />
