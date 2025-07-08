@@ -1,6 +1,89 @@
 # 笔记
 
-## 1. 客户端组件中导入的子组件默认不会自动成为客户端组件
+## 1. 服务端组件可以导入客户端组件，但客户端组件不能导入服务端组件
+
++ 这句话可以理解是对的，也不对
++ 因为客户端组件导入其他的组件，都会变成客户端组件
++ 举个例子：
+
+```js
+// ClientCom.js
+"use client";
+import { useState, useEffect } from "react";
+import ServerCom from "./ServerCom";
+
+export default function ClientCom() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    console.log("ClientCom");
+  }, []);
+
+  return (
+    <div>
+      ClientCom count: {count}
+      <button onClick={() => setCount(count + 1)}>+</button>
+      {count > 0 && <ServerCom />}
+    </div>
+  );
+}
+
+```
+
+```js
+// ServerCom.js
+import dayjs from "dayjs";
+
+export default function ServerCom() {
+  return (
+    <div>
+      ServerCom
+      {dayjs().format("YYYY-MM-DD HH:mm:ss")}
+    </div>
+  );
+}
+
+```
+
+```js
+// page.js
+import ClientCom from "./ClientCom";
+import ServerCom from "./ServerCom";
+
+export default function TestCom() {
+  return <ServerCom />;
+  // return <ClientCom />;
+}
+```
+
++ 当我直接服务端组件导入服务端组件的时候，不存在dayJS，因为渲染在服务器执行，dayjs不参与生产bundle
+
+![image-20250707174530553](noteDemo.assets/image-20250707174530553.png)
+
+```js
+// page.js
+import ClientCom from "./ClientCom";
+import ServerCom from "./ServerCom";
+
+export default function TestCom() {
+  // return <ServerCom />;
+  return <ClientCom />;
+}
+```
+
++ 即使ServerCom是服务端组件，因为父组件是客户端的原因，渲染方式变成了客户端组件，所以dayjs参与打包
++ ![image-20250707174730779](noteDemo.assets/image-20250707174730779.png)
+
++ 所以如果客户端导入服务端组件，就会造成服务端组件失去服务端渲染特性
+
+## 2. 客户端组件中导入的子组件默认会自动成为客户端组件
+
++ 第一：客户端组件是不能够导入服务端组件的
++ 
+
+
+
+
 
 - 客户端组件中导入的子组件默认不会自动成为客户端组件，但它们的渲染行为取决于具体使用方式。
 
@@ -100,3 +183,50 @@
 # 问题
 
 - redis 使用
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+打扰了。我是参与叶子面试的徐培森。之前沟通过入职薪资适宜不知道是否有新的进展，
+
+
+
+您好，我是应聘者徐培森。想跟进一下，**您曾提及会回复后续安排，目前尚未收到消息。** 我对加入贵公司**充满期待**，是否？**期待您的回复，谢谢！**
+
+
+
+想跟您确认下后续安排：您曾在[上次HR承诺回复的具体日期，例如：上周三]告知将于[承诺的回复日，例如：次日/周四]答复我，目前尚未收到消息。
+
+**我理解您工作繁忙，但对加入[公司名称]依然充满期待。** 不知是否有进展可以分享？或方便告知何时能有确定消息？
+
+期待您的回复。如有需要，我的电话是[你的号码]，随时方便沟通。
+
+谢谢！
+
+
+
+
+
+
+
+
+
+
+
