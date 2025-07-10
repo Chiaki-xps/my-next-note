@@ -13,7 +13,7 @@ export default function Page({ children }) {
   return (
     <div>
       {error ? (
-        Error()
+        <div>Error occurred!</div>
       ) : (
         <button onClick={handleGetError}>dashboard/page/Get Error</button>
       )}

@@ -8,11 +8,17 @@ export default function Layout({ children }) {
   return (
     <>
       <div>
-        <Link href="/dashboard/about">About</Link>
+        <Link key="about" href="/dashboard/about">
+          About
+        </Link>
         <br />
-        <Link href="/dashboard/settings">Settings</Link>
+        <Link key="settings" href="/dashboard/settings">
+          Settings
+        </Link>
         <br />
-        <Link href="/dashboard/noFound">noFound</Link>
+        <Link key="noFound" href="/dashboard/noFound">
+          noFound
+        </Link>
       </div>
 
       <h1>Layout {count}</h1>

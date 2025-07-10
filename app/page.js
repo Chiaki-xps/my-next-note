@@ -16,12 +16,25 @@ export default function Page() {
         之后temple.js作为参数传递给layout.js
       </h1>
 
-      <>
-        {error ? Error() : <button onClick={handleGetError}>Get Error</button>}
-      </>
+      <div>
+        {error ? (
+          <div key="error">Error occurred!</div>
+        ) : (
+          <button key="button" onClick={handleGetError}>
+            Get Error
+          </button>
+        )}
+      </div>
 
-      <Link href="/dashboard">dashboard</Link>
-      <Link href="/history">history</Link>
+      <Link key="dashboard" href="/dashboard">
+        dashboard
+      </Link>
+      <Link key="history" href="/history">
+        history
+      </Link>
+      <Link key="testCom" href="/testCom">
+        testCom
+      </Link>
     </>
   );
 }
