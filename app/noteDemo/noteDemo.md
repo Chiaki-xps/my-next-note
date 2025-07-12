@@ -234,11 +234,54 @@ export const revalidate = 0
   + `'layout'`: （**布局级刷新**）
   + `'page'`：仅当前页面 (默认)
 
+## 11. Middleware
+
++ 在 Next.js 中，**一个项目只能有一个顶层的 `middleware.js`/`middleware.ts` 文件**（位于项目根目录或 `src` 根目录）。这是 Next.js 中间件的设计约束
+  + 所以所有中间件处理逻辑都只能在 middleware.js 中处理。
+
++ 配置
+
+  ```js
+  // 使用 matcher 控制执行范围
+  // 通过配置指定中间件只在特定路径触发，减少不必要执行
+  export const config = {
+    matcher: [
+      '/dashboard/:path*', // 仅保护 dashboard 路由
+      '/user/:path*',      // 仅保护 user 路由
+      '/',                 // 仅处理根路径
+    ],
+  };
+  ```
+
++ **接受参数`request: NextRequest`**
+
+这是唯一的参数，包含以下核心属性和方法：
+
+| 属性/方法         | 类型             | 说明                          |
+| :---------------- | :--------------- | :---------------------------- |
+| `request.nextUrl` | `URL` 对象       | 扩展的 URL 对象，提供额外方法 |
+| `request.cookies` | `RequestCookies` | 操作请求的 cookies            |
+| `request.headers` | `Headers`        | 访问请求头                    |
+| `request.geo`     | `Object`         | 客户端地理位置信息            |
+| `request.ip`      | `string`         | 客户端 IP 地址                |
+| `request.method`  | `string`         | HTTP 方法 (GET/POST 等)       |
+| `request.body`    | `ReadableStream` | 请求体数据流                  |
+
++ **`request.nextUrl` (最重要)**
+  + **`url.pathname`**: 当前路径 (`/dashboard/user`)
+  + **`url.searchParams`**: URL 查询参数对象
+  + **`url.href`**: 完整 URL
+  + **`url.origin`**: 协议+域名 (`https://example.com`)
+  + **`url.locale`**: 当前语言环境 (自动检测)
+  + **修改方法**:
+    - `url.pathname = '/new-path'` (重写路径)
+    - `url.searchParams.set('key', 'value')` (修改查询参数)
+
 # 问题
 
 - redis 使用
 - ioredis 使用
-- 
+- useTransition
 
 
 
